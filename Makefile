@@ -18,7 +18,7 @@ define liquibase_migration_command
 	$(liquibase) update 
 endef
 
-define liquibase_clean_command
+define liquibase_drop_command
 	$(liquibase) drop-all 
 endef
 
@@ -34,7 +34,7 @@ define flyway_migration_command
 	$(flyway) migrate 
 endef
 
-define flyway_clean_command
+define flyway_drop_command
 	$(flyway) clean
 endef
 
@@ -42,8 +42,8 @@ define migration_command
 	$(call $(1)_migration_command)
 endef
 
-define clean_command
-	$(call $(1)_clean_command)
+define drop_command
+	$(call $(1)_drop_command)
 endef
 
 .PHONY: services
@@ -56,7 +56,7 @@ db:
 
 .PHONY: db-drop
 db-drop:
-	$(call clean_command,$(MIGRATION_TOOL))
+	$(call drop_command,$(MIGRATION_TOOL))
 
 .PHONY: db-reset
 db-reset: db-drop db
