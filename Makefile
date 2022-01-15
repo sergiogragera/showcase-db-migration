@@ -36,7 +36,7 @@ define flyway
 endef
 
 define flyway_migration_command
-	$(flyway) migrate 
+	$(flyway) migrate -outOfOrder=true
 endef
 
 define flyway_drop_command
