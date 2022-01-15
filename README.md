@@ -10,7 +10,7 @@ We need to install [Docker](https://docs.docker.com/get-docker/) in order to dep
 
 After starting the necessary services (for now just a SQL database) we can run migration commands like `make db` which will upgrade the DB schema to the latest version. Get more details by running `make help`: 
 
-```shell
+```
 make help              Show this help message
 make services          Run DB in Docker Compose
 make db                Upgrade the DB schema to the latest version
