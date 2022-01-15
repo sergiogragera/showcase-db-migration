@@ -4,7 +4,7 @@ This project shows how to execute a migration strategy in evolutionary databases
 
 ## Installation
 
-We need to install [Docker](https://docs.docker.com/get-docker/) in order to deploy the database and migration tool containers. In this first version we use PostgreSQL and Liquibase images.
+We need to install [Docker](https://docs.docker.com/get-docker/) in order to deploy the database and migration tool containers. In this first version we use PostgreSQL and Liquibase/Flyway images.
 
 ## Usage
 

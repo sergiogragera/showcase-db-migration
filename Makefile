@@ -14,20 +14,54 @@ define liquibase
 	--username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
 endef
 
+define liquibase_migration_command
+	$(liquibase) update 
+endef
+
+define liquibase_clean_command
+	$(liquibase) drop-all 
+endef
+
+define flyway
+	docker run --network="host" \
+	--rm -v `pwd`/db/changelog:/flyway/sql \
+	flyway/flyway \
+	-url=jdbc:${POSTGRES_JDBC}/${POSTGRES_DB} \
+	-user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} 
+endef
+
+define flyway_migration_command
+	$(flyway) migrate 
+endef
+
+define flyway_clean_command
+	$(flyway) clean
+endef
+
+define migration_command
+	$(call $(1)_migration_command)
+endef
+
+define clean_command
+	$(call $(1)_clean_command)
+endef
+
 .PHONY: services
 services:
 	@docker-compose up -d
 
 .PHONY: db
-db:
-	@$(liquibase) update
+db: 
+	$(call migration_command,$(MIGRATION_TOOL))
 
 .PHONY: db-drop
 db-drop:
-	@$(liquibase) drop-all
+	$(call clean_command,$(MIGRATION_TOOL))
 
 .PHONY: db-reset
 db-reset: db-drop db
+
+MIGRATION_TOOL=flyway
 
 include database.env
 export
