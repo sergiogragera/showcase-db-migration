@@ -5,6 +5,7 @@ help:
 	@echo 'make db                Upgrade the DB schema to the latest version'
 	@echo 'make db-drop           Drop all object from DB'
 	@echo 'make db-reset          Drop all and upgrade to the latest version'
+	@echo 'make db-rollback       Rollback last migration from DB'
 
 define liquibase
 	docker run --network="host" \
@@ -20,6 +21,10 @@ endef
 
 define liquibase_drop_command
 	$(liquibase) drop-all 
+endef
+
+define liquibase_rollback_command
+	$(liquibase) rollback-count --count 1
 endef
 
 define flyway
@@ -38,12 +43,20 @@ define flyway_drop_command
 	$(flyway) clean
 endef
 
+define flyway_rollback_command
+	$(flyway) undo
+endef
+
 define migration_command
 	$(call $(1)_migration_command)
 endef
 
 define drop_command
 	$(call $(1)_drop_command)
+endef
+
+define rollback_command
+	$(call $(1)_rollback_command)
 endef
 
 .PHONY: services
@@ -57,6 +70,10 @@ db:
 .PHONY: db-drop
 db-drop:
 	$(call drop_command,$(MIGRATION_TOOL))
+
+.PHONY: db-rollback
+db-rollback:
+	$(call rollback_command,$(MIGRATION_TOOL))
 
 .PHONY: db-reset
 db-reset: db-drop db
