@@ -9,7 +9,7 @@
   <changeSet id="1642268349" author="sergio">
     <sqlFile path="sql/V1642268340__add_person_attributes.sql" />
     <rollback>
-      <sqlFile path="sql/rollback/U1642268340__add_person_attribute.sql" />
+      <sqlFile path="sql/rollback/U1642268340__add_person_attributes.sql" />
     </rollback>
   </changeSet>
 </databaseChangeLog>
