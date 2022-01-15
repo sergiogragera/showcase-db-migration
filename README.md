@@ -18,6 +18,12 @@ POSTGRES_PORT=5432
 POSTGRES_JDBC=postgresql://127.0.0.1:${POSTGRES_PORT}
 ```
 
+Then, we need to define migration tool. We have to create the `.env` file with following variable:
+
+```
+MIGRATION_TOOL={liquibase,flyway}
+```
+
 After starting the necessary services (for now just a SQL database) we can run migration commands like `make db` which will upgrade the DB schema to the latest version. Get more details by running `make help`: 
 
 ```

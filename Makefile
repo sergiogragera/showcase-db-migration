@@ -61,7 +61,6 @@ db-drop:
 .PHONY: db-reset
 db-reset: db-drop db
 
-MIGRATION_TOOL=flyway
-
+include .env
 include database.env
 export
