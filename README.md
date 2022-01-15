@@ -8,6 +8,16 @@ We need to install [Docker](https://docs.docker.com/get-docker/) in order to dep
 
 ## Usage
 
+First we need to add the environment configuration. We have to create the `database.env` file with the following variables:
+
+```
+POSTGRES_USER=user
+POSTGRES_PASSWORD=pass
+POSTGRES_DB=db
+POSTGRES_PORT=5432
+POSTGRES_JDBC=postgresql://127.0.0.1:${POSTGRES_PORT}
+```
+
 After starting the necessary services (for now just a SQL database) we can run migration commands like `make db` which will upgrade the DB schema to the latest version. Get more details by running `make help`: 
 
 ```
