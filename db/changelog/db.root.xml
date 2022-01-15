@@ -7,4 +7,5 @@
       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd"
 >  
   <include file="V1642199842__init.sql" relativeToChangelogFile="true" />
+  <include file="V1642268340__add_person_attributes.sql" relativeToChangelogFile="true" />
 </databaseChangeLog>
