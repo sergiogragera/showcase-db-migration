@@ -31,7 +31,7 @@ define flyway
 	docker run --network="host" \
 	--rm -v `pwd`/db/changelog:/flyway/sql \
 	flyway/flyway \
-	-url=jdbc:${POSTGRES_JDBC}/${POSTGRES_DB} \
+	-url=jdbc:${POSTGRES_JDBC} \
 	-user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} 
 endef
 

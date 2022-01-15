@@ -15,7 +15,7 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=pass
 POSTGRES_DB=db
 POSTGRES_PORT=5432
-POSTGRES_JDBC=postgresql://127.0.0.1:${POSTGRES_PORT}
+POSTGRES_JDBC=postgresql://127.0.0.1:${POSTGRES_PORT}/${POSTGRES_DB}
 ```
 
 Then, we need to define migration tool. We have to create the `.env` file with following variable:
