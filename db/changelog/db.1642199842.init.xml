@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+>
+  <changeSet author="sergio" id="1642199842">
+    <createTable tableName="person">
+        <column name="id" type="INTEGER">
+        <constraints nullable="false" primaryKey="true" unique="true" />
+        </column>
+        <column name="name" type="VARCHAR(255)" />
+    </createTable>
+    <rollback>
+        <dropTable tableName="person" />
+    </rollback>
+    </changeSet>
+</databaseChangeLog>
