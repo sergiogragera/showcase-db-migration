@@ -1,0 +1,6 @@
+CREATE
+OR REPLACE VIEW CUSTOMER AS
+SELECT
+    name, surname
+FROM
+    person;
