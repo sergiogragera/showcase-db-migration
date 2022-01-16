@@ -33,7 +33,7 @@ define flyway
 	--rm -v `pwd`/db/changelog:/flyway/sql \
 	flyway/flyway \
 	-url=jdbc:${POSTGRES_JDBC} \
-	-user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} 
+	-user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} $(1)
 endef
 
 define flyway_migration_command
