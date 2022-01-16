@@ -6,13 +6,14 @@ help:
 	@echo 'make db-drop           Drop all object from DB'
 	@echo 'make db-reset          Drop all and upgrade to the latest version'
 	@echo 'make db-rollback       Rollback last migration from DB'
+	@echo 'make db-validate       Validate migrations'
 
 define liquibase
 	docker run --network="host" \
 	--rm -v `pwd`/db/changelog:/liquibase/changelog \
 	liquibase/liquibase --changelog-file=db.root.xml \
 	--url=jdbc:${POSTGRES_JDBC} \
-	--username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
+	--username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD} $(1)
 endef
 
 define liquibase_migration_command
@@ -59,6 +60,11 @@ define rollback_command
 	$(call $(1)_rollback_command)
 endef
 
+define validate_command
+	# Both tools have same subcommand validate
+	$(call $(1),validate)
+endef
+
 .PHONY: services
 services:
 	@docker-compose up -d
@@ -77,6 +83,10 @@ db-rollback:
 
 .PHONY: db-reset
 db-reset: db-drop db
+
+.PHONY: db-validate
+db-validate:
+	$(call validate_command,$(MIGRATION_TOOL))
 
 include .env
 include database.env

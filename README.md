@@ -33,6 +33,7 @@ make db                Upgrade the DB schema to the latest version
 make db-drop           Drop all object from DB
 make db-reset          Drop all and upgrade to the latest version
 make db-rollback       Rollback last migration from DB
+make db-validate       Validate migrations
 ```
 
 ## Contributing
