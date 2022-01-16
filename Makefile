@@ -1,6 +1,7 @@
 .PHONY: help
 help:
 	@echo 'make help              Show this help message'
+	@echo 'make init              Init repository (add hooks)'
 	@echo 'make services          Run DB in Docker Compose'
 	@echo 'make db                Upgrade the DB schema to the latest version'
 	@echo 'make db-drop           Drop all object from DB'
