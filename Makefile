@@ -72,6 +72,10 @@ define validate_command
 	$(call $(1)_validate_command)
 endef
 
+init:
+	find .git/hooks -type l -exec rm {} \;
+	find .githooks -type f -exec ln -sf ../../{} .git/hooks/ \;
+
 .PHONY: services
 services:
 	@docker-compose up -d
