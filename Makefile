@@ -13,7 +13,7 @@ define liquibase
 	--rm -v `pwd`/db/changelog:/liquibase/changelog \
 	liquibase/liquibase --changelog-file=db.root.xml \
 	--url=jdbc:${POSTGRES_JDBC} \
-	--username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD} $(1)
+	--username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
 endef
 
 define liquibase_migration_command
@@ -28,16 +28,20 @@ define liquibase_rollback_command
 	$(liquibase) rollback-count --count 1
 endef
 
+define liquibase_validate_command
+	$(liquibase) validate
+endef
+
 define flyway
 	docker run --network="host" \
 	--rm -v `pwd`/db/changelog:/flyway/sql \
 	flyway/flyway \
 	-url=jdbc:${POSTGRES_JDBC} \
-	-user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} $(1)
+	-user=${POSTGRES_USER} -password=${POSTGRES_PASSWORD} -outOfOrder=true
 endef
 
 define flyway_migration_command
-	$(flyway) migrate -outOfOrder=true
+	$(flyway) migrate
 endef
 
 define flyway_drop_command
@@ -46,6 +50,10 @@ endef
 
 define flyway_rollback_command
 	$(flyway) undo
+endef
+
+define flyway_validate_command
+	$(flyway) -ignorePendingMigrations=true validate
 endef
 
 define migration_command
@@ -61,8 +69,7 @@ define rollback_command
 endef
 
 define validate_command
-	# Both tools have same subcommand validate
-	$(call $(1),validate)
+	$(call $(1)_validate_command)
 endef
 
 .PHONY: services
