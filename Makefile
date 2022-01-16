@@ -11,7 +11,7 @@ define liquibase
 	docker run --network="host" \
 	--rm -v `pwd`/db/changelog:/liquibase/changelog \
 	liquibase/liquibase --changelog-file=db.root.xml \
-	--url=jdbc:${POSTGRES_JDBC}/${POSTGRES_DB} \
+	--url=jdbc:${POSTGRES_JDBC} \
 	--username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
 endef
 
