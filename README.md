@@ -1,10 +1,10 @@
-# DB migration strategy
+# Showcase DB migration and Tools
 
-This project shows how to execute a migration strategy in evolutionary databases in order to avoid collisions when working with different branches.
+This project demostrates how to execute a migration strategy in evolutionary databases in order to avoid collisions when working with different branches. This repo use Liquibase and Flyway migration tools.
 
 ## Installation
 
-We need to install [Docker](https://docs.docker.com/get-docker/) in order to deploy the database and migration tool containers. In this first version we use PostgreSQL and Liquibase/Flyway images.
+We need to install [Docker](https://docs.docker.com/get-docker/) in order to deploy the database and migration tool containers. In this first version we use PostgreSQL as database system and Liquibase or Flyway as migration tool.
 
 ## Usage
 
